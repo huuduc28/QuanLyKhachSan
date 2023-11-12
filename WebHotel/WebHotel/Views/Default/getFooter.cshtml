@@ -1,0 +1,24 @@
+﻿@model IEnumerable<WebHotel.Models.footer>
+@foreach (var i in Model)
+{
+    <div class="col-md-6 col-lg-4">
+        <div class="bg-primary rounded p-4">
+            <a href="index.html"><h1 class="text-white text-uppercase mb-3">@i.name</h1></a>
+            <p class="text-white mb-0">@i.introduce</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <h6 class="section-title text-start text-primary text-uppercase mb-4">Contact</h6>
+
+        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>@i.address</p>
+        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>@i.phone</p>
+        <p class="mb-2"><i class="fa fa-envelope me-3"></i>@i.</p>
+       
+        <div class="d-flex pt-2">
+            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+}

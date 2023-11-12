@@ -1,0 +1,140 @@
+﻿@model IEnumerable<WebHotel.Models.Booking>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/Mylayout.cshtml";
+}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4" style="border: 3px solid pink">
+                <div class="card-header pb-0" style="background-color: pink">
+                    <h6>Quản lý đặt phòng</h6>
+                </div>
+                </p>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">STT</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên khách hàng</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CMND/CCCD</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Số điện thoại</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày check in</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày check out</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Giá tiền</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên Phòng</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày đặt</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{var Number = 1; }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td style="text-align:center">
+                                            @Html.Raw(Number++)
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @Html.DisplayFor(modelItem => item.namecustomer)
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @Html.DisplayFor(modelItem => item.customerID)
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @Html.DisplayFor(modelItem => item.phone)
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @(item.checkin.HasValue ? item.checkout.Value.ToString("dd/MM/yyyy") : "")
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @(item.checkout.HasValue ? item.checkout.Value.ToString("dd/MM/yyyy") : "")
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @String.Format("{0:#,##0} đ", item.price)
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @Html.DisplayFor(modelItem => item.nameRoom)
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @(item.datebegin.HasValue ? item.datebegin.Value.ToString("dd/MM/yyyy") : "")
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="@Url.Action("Details", "Bookings", new { id = item.id })" class="btn btn-primary">
+                                                <i class="fab 	fas fa-search fa-fw"></i>
+                                            </a>
+                                            <a href="@Url.Action("Delete", "Bookings", new { id = item.id })" class="btn btn-danger">
+                                                <i class="fab 	fas fa-trash-alt fa-fw"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        window.onload = active();
+        function active() {
+
+            if (document.getElementById("nav-booking").className == "nav-link") {
+                document.getElementById("nav-booking").className = "nav-link active";
+            }
+        }
+
+</script>

@@ -1,0 +1,131 @@
+﻿@model WebHotel.Models.News
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/admin/Views/Shared/Mylayout.cshtml";
+}
+@section _Header
+{
+    <style>
+        textarea {
+            width: 770px;
+            height: 150px
+        }
+    </style>
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-4" style="border: 3px solid pink">
+                <div class="card-header pb-0" style="background-color: pink">
+                    <h6>Thêm Tin mới</h6>
+                </div>
+                <div class="form-main" style="margin-left:10%; margin-top:10px">
+                    @using (Html.BeginForm("Create", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group row">
+                                @Html.Label("Tên Tin", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.Label("Hình ảnh", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-9">
+                                    <div class="col-md-5 ">
+                                        <input type="file" name="img" id="img" accept=".jpg,.png,.gif,.jpeg,.bmp" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.Label("Mô tả", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-9">
+                                    <div class="col-md-9">
+                                        @Html.TextAreaFor(model => model.description, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.Label("Chi tiết", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-9">
+                                    @Html.TextAreaFor(model => model.detail, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                                    @Html.ValidationMessageFor(model => model.detail, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.meta, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.meta, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.meta, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.Label("Hiển thị", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-9">
+                                    @{
+                                        bool hide = true;
+                                    }
+                                    @Html.CheckBoxFor(model => hide)
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.order, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.order, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.order, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-actions no-color" style="margin-top:20px">
+                                <input type="submit" value="Thêm" class="btn btn-danger" /> |
+                                @Html.ActionLink("Quay Lại", "Index")
+                            </div>
+                        </div>
+
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section _Footer
+{
+    <script src="~/Areas/admin/Content/ckfinder/ckfinder.js"></script>
+    <script src="~/Areas/admin/Content/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
+        var editor = CKEDITOR.replace("detail");
+        var editor = CKEDITOR.replace("detail", { height: '600px' });
+        customConfig: '/Areas/admin/Content/ckeditor/config.js';
+    </script>
+    <script>
+        $(function () {
+            $("#name").keyup(function () {
+                var text = $.trim($(this).val().toLowerCase());
+                var text_create;
+                text_create = text.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a").replace(/\ /g, '-').replace(/đ/g, "d").replace(/đ/g, "d").replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y").replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u").replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ.+/g, "o").replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ.+/g, "e").replace(/ì|í|ị|ỉ|ĩ/g, "i");
+                $('#meta').val(text_create);
+            }).keyup();
+        });
+    </script>
+    <script>
+        window.onload = active();
+        function active() {
+
+            if (document.getElementById("nav-news").className == "nav-link") {
+                document.getElementById("nav-news").className = "nav-link active";
+            }
+        }
+
+    </script>
+}
+

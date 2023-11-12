@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ebad6d8ec63a4cc1bb96df12dcbbea59" Name="Diagram1" ZoomLevel="53">
+        <EntityTypeShape EntityType="HotelOnlineModel.Menu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelOnlineModel.footer" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="HotelOnlineModel.About" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="HotelOnlineModel.Room" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="HotelOnlineModel.Caterogy" Width="1.5" PointX="7.375" PointY="4.75" />
+        <AssociationConnector Association="HotelOnlineModel.FK__Room__idcategory__160F4887" />
+        <EntityTypeShape EntityType="HotelOnlineModel.sysdiagram" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HotelOnlineModel.News" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="HotelOnlineModel.Banner" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HotelOnlineModel.Booking" Width="1.5" PointX="7.625" PointY="8.375" />
+        <AssociationConnector Association="HotelOnlineModel.FK__Booking__idRoom__318258D2" />
+        <EntityTypeShape EntityType="HotelOnlineModel.Review" Width="1.5" PointX="5.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

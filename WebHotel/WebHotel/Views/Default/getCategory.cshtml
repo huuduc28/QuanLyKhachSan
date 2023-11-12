@@ -1,0 +1,8 @@
+﻿@model IEnumerable<WebHotel.Models.Caterogy>
+
+<div class="dropdown-menu rounded-0 m-0">
+    @foreach (var i in Model)
+    {
+        <a href="/Phong/@i.meta/" class="dropdown-item">@i.name</a>
+    }
+</div>

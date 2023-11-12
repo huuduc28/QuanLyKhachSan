@@ -1,0 +1,95 @@
+﻿@model WebHotel.Models.News
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/Mylayout.cshtml";
+}
+<div class="container1">
+    <div class="article">
+        <h1>@Model.name</h1>
+        <div class="meta">Ngày đăng:@(Model.datebegin.HasValue ? Model.datebegin.Value.ToString("dd/MM/yyyy") : "") - Tác giả: Nguyễn Hữu Đức</div>
+        <img src="~/Upload/img/@Model.img" alt="Ảnh minh họa">
+        <div id="content" style="margin-top:10px"></div>
+    </div>
+</div>
+<script>
+let htmlString = `@Html.Raw(Model.detail)`;
+let escapedHtmlString = encodeURIComponent(htmlString);
+    document.getElementById('content').innerHTML = decodeURIComponent(escapedHtmlString);
+</script>
+
+<style>
+    /* Reset CSS */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Main styles */
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        background-color: #f5f5f5;
+        color: #333;
+    }
+
+    .container1 {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .article {
+        margin-bottom: 40px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid #ccc;
+    }
+
+        .article h1 {
+            margin-bottom: 20px;
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .article .meta {
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #999;
+        }
+
+        .article .content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article img {
+            display: block;
+            max-width: 100%;
+            margin-bottom: 20px;
+            width: 800px;
+            height: 400px;
+            margin: auto;
+        }
+
+    .back-link {
+        display: block;
+        margin-top: 20px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #666;
+        text-decoration: none;
+        transition: color 0.2s ease-in-out;
+    }
+
+        .back-link:hover {
+            color: #333;
+        }
+</style>
+

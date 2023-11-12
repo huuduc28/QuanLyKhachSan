@@ -1,0 +1,12 @@
+﻿@model IEnumerable<WebHotel.Models.Menu>
+<div class="navbar-nav mr-auto py-0">
+    @foreach (var i in Model)
+    {
+        <a href="@i.meta" class="nav-item nav-link">@i.name</a>
+    }
+    <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Room</a>
+        @{Html.RenderAction("getCategory", "Default");}
+    </div>
+</div>
+

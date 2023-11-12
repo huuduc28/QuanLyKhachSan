@@ -1,0 +1,176 @@
+﻿@model WebHotel.Models.Booking
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/admin/Views/Shared/Mylayout.cshtml";
+}
+@{
+    string formattedPrice = String.Format("{0:#,##0} đ", Model.price);
+}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="card mb-4" style="border: 3px solid pink">
+                <div class="card-header pb-0" style="background-color: pink">
+                    <h6>Xóa</h6>
+                </div>
+                <h4 style="margin-left: 20px; margin-top: 20px">Are you sure you want to delete this?</h4>
+                <hr />
+                <div class="form-main" style="margin-left:10%">
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Số phòng")
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.idRoom)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Tên phòng")
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.nameRoom)
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Tên khách hàng")
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.namecustomer)
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("CMND/CCCD")
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.customerID)
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Số điện thoại")
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.phone)
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Email")
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.email)
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Check In")
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.checkin)
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Check Out")
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.checkout)
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Ghi chú")
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.message)
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayNameFor(model => model.meta)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.meta)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayNameFor(model => model.hide)
+                        </div>
+                        <div class="col-md-9">
+                            @(Model.hide.GetValueOrDefault(false) ? "Hiển thị" : "Ẩn")
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayNameFor(model => model.order)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.order)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Ngày đặt")
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.datebegin)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Giá tiền")
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => formattedPrice)                         
+                        </div>
+                    </div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-danger" /> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = active();
+    function active() {
+
+        if (document.getElementById("nav-booking").className == "nav-link") {
+            document.getElementById("nav-booking").className = "nav-link active";
+        }
+    }
+
+</script>

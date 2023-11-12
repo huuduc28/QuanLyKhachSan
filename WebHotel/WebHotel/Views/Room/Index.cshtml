@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Mylayout.cshtml";
+}
+
+@{Html.RenderAction("getBannerSmall", "Default");}
+
+
+<!-- Room Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">Our Rooms</h6>
+            <h1 class="mb-5">Tất cả <span class="text-primary text-uppercase">Phòng</span></h1>
+        </div>
+        <div class="row g-4">
+            @{Html.RenderAction("getRoom", "Room");}
+        </div>
+    </div>
+</div>
+<!-- Room End -->
+<!-- Testimonial Start -->
+@{Html.RenderAction("getReview", "Sevice");}
+<!-- Testimonial End -->

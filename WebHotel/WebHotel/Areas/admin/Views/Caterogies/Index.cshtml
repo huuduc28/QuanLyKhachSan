@@ -1,0 +1,105 @@
+﻿@model IEnumerable<WebHotel.Models.Caterogy>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/Mylayout.cshtml";
+}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4" style="border: 3px solid pink">
+                <div class="card-header pb-0" style="background-color: pink">
+                    <h6>Quản lý Phòng</h6>
+                </div>
+                <p style="margin-top:10px; margin-left:10px">
+                    <a href="@Url.Action("Create", "Caterogies")" class="btn btn-primary">
+                        <i class="fab  fas fa-plus fa-fw"></i>Thêm Danh mục
+               
+                    </a>
+                </p>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">STT</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên Menu</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Meta</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày thêm</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vị trí</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{var Number = 1; }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td style="text-align:center">
+                                            @Html.Raw(Number++)
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @Html.DisplayFor(modelItem => item.name)
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @Html.DisplayFor(modelItem => item.meta)
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @(item.datebegin.HasValue ? item.datebegin.Value.ToString("dd/MM/yyyy") : "")
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @Html.DisplayFor(modelItem => item.order)
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="@Url.Action("Edit", "Caterogies", new { id = item.id })" class="btn">
+                                                <i class="fab fas fa-pen fa-fw"></i>
+                                            </a>
+                                            <a href="@Url.Action("Details", "Caterogies", new { id = item.id })" class="btn btn-primary">
+                                                <i class="fab 	fas fa-search fa-fw"></i>
+                                            </a>
+                                            <a href="@Url.Action("Delete", "Caterogies", new { id = item.id })" class="btn btn-danger">
+                                                <i class="fab 	fas fa-trash-alt fa-fw"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = active();
+    function active() {
+        if (document.getElementById("nav-categori").className == "nav-link") {
+            document.getElementById("nav-categori").className = "nav-link active";
+        }
+    }
+</script>

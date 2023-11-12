@@ -1,0 +1,117 @@
+﻿@model IEnumerable<WebHotel.Models.Banner>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/Mylayout.cshtml";
+}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4" style="border: 3px solid pink">
+                <div class="card-header pb-0" style="background-color: pink">
+                    <h6>Quản lý Banner</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên Menu</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hình 1</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hình 2</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hình 3</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày sửa</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @Html.DisplayFor(modelItem => item.name)
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @Html.DisplayFor(modelItem => item.title)
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        <img src="~/Upload/img/@Html.DisplayFor(modelItem => item.img1)" style="width:100px" />
+                                                       
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        <img src="~/Upload/img/@Html.DisplayFor(modelItem => item.img2)" style="width:100px" />
+                                                       
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        <img src="~/Upload/img/@Html.DisplayFor(modelItem => item.img3)" style="width:100px" />
+                                                       
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @(item.datebegin.HasValue ? item.datebegin.Value.ToString("dd/MM/yyyy") : "")
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="@Url.Action("Edit", "Banners", new { id = item.id })" class="btn">
+                                                <i class="fab fas fa-pen fa-fw"></i>
+                                            </a>
+                                            <a href="@Url.Action("Details", "Banners", new { id = item.id })" class="btn btn-primary">
+                                                <i class="fab 	fas fa-search fa-fw"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        window.onload = active();
+        function active() {
+
+            if (document.getElementById("nav-banner").className == "nav-link") {
+                document.getElementById("nav-banner").className = "nav-link active";
+            }
+        }
+
+</script>

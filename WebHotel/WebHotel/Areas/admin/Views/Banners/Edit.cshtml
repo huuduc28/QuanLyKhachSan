@@ -1,0 +1,109 @@
+﻿@model WebHotel.Models.Banner
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/admin/Views/Shared/Mylayout.cshtml";
+}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-4" style="border: 3px solid pink">
+                <div class="card-header pb-0" style="background-color: pink">
+                    <h6>Chỉnh sửa Tin</h6>
+                </div>
+                <div class="form-main" style="margin-left:10%">
+                    @using (Html.BeginForm("Edit", "Banners", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal mt-4">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.id)
+                            <div class="form-group row">
+                                @Html.Label("Tên Tin", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.Label("Title", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                                    @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.Label("Hình ảnh 1", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5 ">
+                                    <input type="file" name="img1" id="img1" accept=".jpg,.png,.gif,.jpeg,.bmp" />
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="~/Upload/img/@Model.img1" style="width:150px" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.Label("Hình ảnh 2", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5 ">
+                                    <input type="file" name="img2" id="img2" accept=".jpg,.png,.gif,.jpeg,.bmp" />
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="~/Upload/img/@Model.img2" style="width:150px" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.Label("Hình ảnh 3", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5 ">
+                                    <input type="file" name="img3" id="img3" accept=".jpg,.png,.gif,.jpeg,.bmp" />
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="~/Upload/img/@Model.img3" style="width:150px" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.meta, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.meta, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.meta, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.Label("Hiển thị", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-9">
+                                    @{
+                                        bool hide = (Model.hide.GetValueOrDefault(false) ? true : false);
+                                    }
+                                    @Html.CheckBoxFor(model => hide)
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.Label("Vị trí", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.order, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                                    @Html.ValidationMessageFor(model => model.order, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-actions no-color" style="margin-top:20px">
+                                <input type="submit" value="Lưu" class="btn btn-danger" /> |
+                                @Html.ActionLink("Quay Lại", "Index")
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = active();
+    function active() {
+
+        if (document.getElementById("nav-banner").className == "nav-link") {
+            document.getElementById("nav-banner").className = "nav-link active";
+        }
+    }
+
+</script>

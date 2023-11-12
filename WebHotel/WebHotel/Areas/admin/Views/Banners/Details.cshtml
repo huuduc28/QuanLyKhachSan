@@ -1,0 +1,115 @@
+﻿@model WebHotel.Models.Banner
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/admin/Views/Shared/Mylayout.cshtml";
+}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="card mb-4" style="border: 3px solid pink">
+                <div class="card-header pb-0" style="background-color: pink">
+                    <h6>Chi tiết</h6>
+                </div>
+                <div class="form-main" style="margin-left:10%">
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Tên Baner")
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.name)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Title")
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.title)
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Hình 1")
+
+                        </div>
+                        <div class="col-md-9">
+                            <img src="~/Upload/img/@Html.DisplayFor(model => model.img1)" style="width:150px" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Hình 2")
+
+                        </div>
+                        <div class="col-md-9">
+                            <img src="~/Upload/img/@Html.DisplayFor(model => model.img2)" style="width:150px" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Hình 3")
+
+                        </div>
+                        <div class="col-md-9">
+                            <img src="~/Upload/img/@Html.DisplayFor(model => model.img3)" style="width:150px" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayNameFor(model => model.meta)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.meta)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayNameFor(model => model.hide)
+                        </div>
+                        <div class="col-md-9">
+                            @(Model.hide.GetValueOrDefault(false) ? "Hiển thị" : "Ẩn")
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayNameFor(model => model.order)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.order)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            @Html.DisplayName("Ngày cập nhập")
+                        </div>
+                        <div class="col-md-9">
+                            @(Model.datebegin.HasValue ? Model.datebegin.Value.ToString("dd/MM/yyyy") : "")
+                        </div>
+                    </div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = active();
+    function active() {
+
+        if (document.getElementById("nav-banner").className == "nav-link") {
+            document.getElementById("nav-banner").className = "nav-link active";
+        }
+    }
+
+</script>

@@ -1,0 +1,155 @@
+﻿@model WebHotel.Models.Room
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Mylayout.cshtml";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 p-0" style="background-image: url(/Upload/img/carousel-1.jpg);">
+    <div class="container-fluid page-header-inner py-5">
+        <div class="container text-center pb-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Booking</h1>
+            <nav aria-label="breadcrumb">
+
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Booking Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">Room Booking</h6>
+            <h1 class="mb-5"><span class="text-primary text-uppercase">@Model.name @Model.id</span></h1>
+        </div>
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <div class="row g-3">
+                    <img class="img-fluid rounded wow zoomIn" data-wow-delay="0.1s" src="~/Upload/img/@Model.img" style="">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="wow fadeInUp" data-wow-delay="0.2s">
+                    <form method="post" action="@Url.Action("Create","Booking")">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="hidden" class="form-control" id="idRoom" name="idRoom" value="@Model.id">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="hidden" class="form-control" id="nameRoom" name="nameRoom" value="@Model.name">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="namecustomer" name="namecustomer" placeholder="Your Name">
+                                    <label for="namecustomer">Họ và tên</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="phone" pattern="0\d{9}" name="phone" placeholder="Your Phone">
+                                    <label for="phone">Số điện thoại</label>    
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Your Name">
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="customerID" name="customerID" placeholder="Your CMND/CCCD<">
+                                    <label for="customerID">CMND/CCCD</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating date" id="date3" data-target-input="nearest">
+                                    <input type="date" class="form-control" id="checkin" name="checkin" placeholder="Check Out" />
+                                    <label for="checkin">Check In</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating date" id="date4" data-target-input="nearest">
+                                    <input type="date" class="form-control" id="checkout" name="checkout" placeholder="Check Out" />
+                                    <label for="checkout">Check Out</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Special Request" name="message" id="message" style="height: 100px"></textarea>
+                                    <label for="message">Special Request</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h3>
+                                    <input type="hidden" class="form-control" id="priceTotal" name="price" placeholder="Your Name" value="@Model.price">
+                                    <span id="price" class="text-primary">Giá tiền: @String.Format("{0:#,##0} đ", Model.price)</span>
+                                </h3>
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Booking End -->
+<script>
+    var date1Input = document.getElementById("checkin");
+    var date1;
+    // Thêm sự kiện change vào trường input đầu tiên
+    date1Input.addEventListener("change", function () {
+        date1 = new Date(date1Input.value);
+        calculateDateDiff();
+    });
+    // Lấy giá trị từ trường input thứ hai
+    var date2Input = document.getElementById("checkout");
+    var date2;
+    // Thêm sự kiện change vào trường input thứ hai
+    date2Input.addEventListener("change", function () {
+        date2 = new Date(date2Input.value);
+        calculateDateDiff();
+    });
+    var price = parseInt("@Model.price");
+    var pricetotal;
+    function calculateDateDiff() {
+        if (date1 != null && date2 != null) {
+            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            if (diffDays < 0) {
+                pricetotal = 0
+                document.getElementById("priceTotal").setAttribute("value", pricetotal);
+                document.getElementById("price").innerHTML = "Giá tiền: " + pricetotal.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });;
+            }
+            if (diffDays == 0) {
+                pricetotal = price
+                document.getElementById("priceTotal").setAttribute("value", pricetotal);
+                document.getElementById("price").innerHTML = "Giá tiền: " + pricetotal.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });;
+
+            } else {
+                pricetotal = price * diffDays
+                document.getElementById("priceTotal").setAttribute("value", pricetotal);
+                document.getElementById("price").innerHTML = "Giá tiền: " + pricetotal.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });;
+            }
+           
+        }
+    }
+</script>

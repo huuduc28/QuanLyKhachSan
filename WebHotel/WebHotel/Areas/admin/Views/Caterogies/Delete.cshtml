@@ -1,0 +1,80 @@
+﻿@model WebHotel.Models.Caterogy
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/admin/Views/Shared/Mylayout.cshtml";
+}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="card mb-4" style="border: 3px solid pink">
+                <div class="card-header pb-0" style="background-color: pink">
+                    <h6>Xóa Danh mục</h6>
+                </div>
+                <h4 style="margin-left: 20px; margin-top: 20px">Are you sure you want to delete this?</h4>
+                <hr />
+                <div class="form-main" style="margin-left:10%">
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            @Html.DisplayNameFor(model => model.name)
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.name)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            @Html.DisplayNameFor(model => model.meta)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.meta)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            @Html.DisplayNameFor(model => model.hide)
+                        </div>
+                        <div class="col-md-9">
+                            @(Model.hide.GetValueOrDefault(false) ? "Hiển thị" : "Ẩn")
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            @Html.DisplayNameFor(model => model.order)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(model => model.order)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            @Html.DisplayNameFor(model => model.datebegin)
+                        </div>
+                        <div class="col-md-9">
+                            @(Model.datebegin.HasValue ? Model.datebegin.Value.ToString("dd/MM/yyyy") : "")
+                        </div>
+                    </div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-default" /> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = active();
+    function active() {
+        if (document.getElementById("nav-categori").className == "nav-link") {
+            document.getElementById("nav-categori").className = "nav-link active";
+        }
+    }
+</script>

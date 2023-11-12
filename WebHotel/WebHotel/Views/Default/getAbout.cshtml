@@ -1,0 +1,8 @@
+﻿@model  IEnumerable<WebHotel.Models.About>
+@foreach (var i in Model)
+{
+    <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
+    <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">@i.name</span></h1>
+    <p class="mb-4">@i.content</p>
+}
+    
